@@ -3,6 +3,7 @@
 
 tests = [
     'flow_rule_counters',
+    'flow_rule_dec_ttl',
     'flow_rule_decap_on_ingress',
     'flow_rule_drop',
     'flow_rule_encap_on_egress',

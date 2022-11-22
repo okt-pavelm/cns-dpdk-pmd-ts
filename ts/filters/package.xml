@@ -596,6 +596,26 @@
             </arg>
         </run>
 
+        <run>
+            <script name="flow_rule_dec_ttl"/>
+            <arg name="env">
+                <value ref="env.peer2peer"/>
+            </arg>
+            <arg name="flow_rule_pattern">
+                <value ref="flow_rule_pattern.ethertype.ip4"/>
+            </arg>
+            <arg name="transfer">
+              <value reqs="FLOW_TRANSFER">TRUE</value>
+            </arg>
+            <arg name="ttl">
+                <value>0</value>
+                <value>1</value>
+                <value>2</value>
+                <value>64</value>
+                <value>255</value>
+            </arg>
+        </run>
+
         <!--- @autogroup -->
         <run>
             <script name="flow_tunnel">

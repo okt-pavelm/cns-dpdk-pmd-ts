@@ -14434,6 +14434,22 @@
       </iter>
     </test>
 
+    <test name="flow_rule_dec_ttl" type="script">
+      <objective>Check for decreasing TTL value for DEC_TTL action</objective>
+      <notes/>
+      <iter result="PASSED">
+        <arg name="env"/>
+        <arg name="flow_rule_pattern"/>
+        <arg name="ttl"/>
+        <notes/>
+        <results tags="pci-1924&amp;rx-dpdk" key="WONTFIX FW" notes="FW variant does not support match pattern">
+          <result value="SKIPPED">
+            <verdict>'rte_flow_validate' operation failed: The flow rule pattern is unsupported</verdict>
+          </result>
+        </results>
+      </iter>
+    </test>
+
     <test name="flow_tunnel" type="script">
       <objective>Verify basic tunnel offload operability</objective>
       <notes/>
