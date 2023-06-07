@@ -591,6 +591,30 @@
               <value ref="env.peer2peer"/>
             </arg>
             <arg name="flow_pattern_ndn">
+                <value ref="flow_rule_pattern.ethertype"/>
+                <value ref="flow_rule_pattern.ethertype.arp"/>
+                <value ref="flow_rule_pattern.ethertype.pppoed"/>
+                <value ref="flow_rule_pattern.ethertype.pppoes"/>
+                <value ref="flow_rule_pattern.ethertype.ip4"/>
+                <value ref="flow_rule_pattern.ethertype.outer_vid"/>
+                <value ref="flow_rule_pattern.ethertype.outer_vid.inner_vid"/>
+                <value ref="flow_rule_pattern.dst_mac"/>
+                <value ref="flow_rule_pattern.unknown_ucast_dst_mac"/>
+                <value ref="flow_rule_pattern.unknown_mcast_dst_mac"/>
+                <value ref="flow_rule_pattern.dst_mac.ethertype"/>
+                <value ref="flow_rule_pattern.dst_mac.ethertype.ip4"/>
+                <value ref="flow_rule_pattern.ip_proto"/>
+                <value ref="flow_rule_pattern.ip_proto.icmp4"/>
+                <value ref="flow_rule_pattern.ip_proto.udp"/>
+                <value ref="flow_rule_pattern.ip_proto.tcp"/>
+                <value ref="flow_rule_pattern.dst_mac.ip_proto"/>
+                <value ref="flow_rule_pattern.dst_mac.ip_proto.udp"/>
+                <value ref="flow_rule_pattern.3tuple.udp"/>
+                <value ref="flow_rule_pattern.5tuple.udp"/>
+                <value ref="flow_rule_pattern.dst_mac.3tuple.udp"/>
+                <value ref="flow_rule_pattern.dst_mac.5tuple.udp"/>
+                <value ref="flow_rule_pattern.3tuple.tcp"/>
+                <value ref="flow_rule_pattern.5tuple.tcp"/>
                 <value ref="flow_rule_pattern.dst_mac.3tuple.tcp"/>
                 <value ref="flow_rule_pattern.dst_mac.5tuple.tcp"/>
             </arg>

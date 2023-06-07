@@ -47,6 +47,7 @@ main(int argc, char *argv[])
     asn_value                   *tmpl_match;
     tarpc_rte_flow_error        flow_error;
     unsigned int                i;
+    bool                        drop = TRUE;
 
     const uint8_t             zero_mac[ETHER_ADDR_LEN] = {0};
     struct sockaddr           zero_ip = {0};
@@ -90,11 +91,18 @@ main(int argc, char *argv[])
     tapi_rte_flow_make_attr(iut_rpcs, 0, 0, FALSE, FALSE, TRUE,
                             &flow_attributes);
     CHECK_NOT_NULL(flow_actions_ndn = asn_init_value(ndn_rte_flow_actions));
+
     tapi_rte_flow_add_ndn_action_port(NDN_FLOW_ACTION_TYPE_REPRESENTED_PORT,
                                       iut_port->if_index, flow_actions_ndn,
                                       -1);
+    if (drop)
+    {
+        TEST_STEP("Make flow rule action \"drop\"");
+        tapi_rte_flow_add_ndn_action_drop(flow_actions_ndn, -1);
+    }
     rpc_rte_mk_flow_rule_components(iut_rpcs, flow_actions_ndn, NULL, NULL,
                                     &flow_actions);
+
     flow = tapi_rte_flow_validate_and_create_rule(iut_rpcs, iut_port->if_index,
                                                   flow_attributes, flow_pattern,
                                                   flow_actions);
@@ -110,13 +118,16 @@ main(int argc, char *argv[])
 
     TEST_STEP("Transmit the matching packet and watch it come back");
     test_transciever_simple_exchange_commit(tmpl_match,
-                                            tr_tst, 1, 0, tr_tst, 1, 0, NULL,
+                                            tr_tst, 1, 0, tr_tst, /*drop ? 0 : */1, 0, NULL,
                                             "Matching packet wasn't reflected");
 
     TEST_STEP("Retransmit the matching packet and ensure it's unseen on IUT");
     test_transciever_simple_exchange_commit(tmpl_match,
                                             tr_tst, 1, 0, tr_iut, 0, 0, NULL,
                                             "Matching packet is seen on IUT");
+
+    if (drop)
+        TEST_SUCCESS;
 
     TEST_STEP("Prepare non-matching templates");
     CHECK_RC(test_mk_tmpls_with_change_one_field(tmpl_match, match_fields,
