@@ -31499,5 +31499,16 @@
         </results>
       </iter>
     </test>
+    <test name="io_forward_and_drop" type="script">
+      <objective>Check that IO-forwarded packets do not erroneously bypass the flow engine</objective>
+      <notes/>
+      <iter result="PASSED">
+        <arg name="env"/>
+        <arg name="rx_tmpl"/>
+        <arg name="tx_tmpl"/>
+        <arg name="flow_rule_pattern"/>
+        <notes/>
+      </iter>
+    </test>
   </iter>
 </test>

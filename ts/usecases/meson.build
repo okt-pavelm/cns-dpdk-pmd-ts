@@ -11,6 +11,7 @@ tests = [
     'flow_ctrl_get',
     'fw_version',
     'get_mtu',
+    'io_forward_and_drop',
     'link_up_down',
     'multi_process',
     'promiscuous_mode',

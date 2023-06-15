@@ -1237,6 +1237,28 @@
             <arg name="vlan_strip" type="boolean"/>
             <arg name="qinq_strip" type="boolean"/>
         </run>
+        <!--- @autogroup -->
+        <run name="io_forward_and_drop">
+            <script name="io_forward_and_drop"/>
+            <arg name="env">
+              <value ref="env.peer2peer"/>
+            </arg>
+            <arg name="rx_tmpl">
+                <value ref="tmpl.tst2iut.eth"/>
+            </arg>
+            <arg name="tx_tmpl">
+                <value ref="tmpl.iut2tst.eth"/>
+            </arg>
+            <arg name="flow_rule_pattern" list="pattern">
+                <value>{
+                    eth:{
+                        dst-addr env:{ name "param.iut_mac" },
+                        src-addr env:{ name "env.addr.tst_lladdr" },
+                        length-type plain:8111
+                    }
+                }</value>
+            </arg>
+        </run>
 
     </session>
 </package>
