@@ -161,6 +161,22 @@ main(int argc, char *argv[])
         CHECK_RC(test_prepare_ethdev(&ethdev_config_rep, TEST_ETHDEV_STARTED));
         CHECK_RC(test_prepare_ethdev(ethdev_config_vf, TEST_ETHDEV_STARTED));
 
+
+        uint16_t                                proxy_port;
+        ERROR("varlogen >> call rpc_rte_flow_pick_transfer_proxy");
+        rpc_rte_flow_pick_transfer_proxy(iut_rpcs, ethdev_config_rep.port_id,
+                                         &proxy_port, NULL);
+        ERROR("varlogen >> pick port ethdev_config_rep %d, proxy_port = %d", ethdev_config_rep.port_id, proxy_port);
+
+        ERROR("varlogen >> call rpc_rte_flow_pick_transfer_proxy");
+        rpc_rte_flow_pick_transfer_proxy(iut_rpcs, ethdev_config_vf->port_id,
+                                         &proxy_port, NULL);
+        ERROR("varlogen >> pick port ethdev_config_vf %d, proxy_port = %d", ethdev_config_vf->port_id, proxy_port);
+
+
+        TEST_SUCCESS;
+
+
         TEST_STEP("Init packet transmission between TST and IUT PF / VF / representor");
         trsc_dpdk = test_transceiver_dpdk_init(iut_rpcs, ethdev_config.port_id,
                                                ethdev_config.mp);
